@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Censos Guatemala</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+        <script src="bootstrap/js/bootstrap.js"></script>
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="js/util.js"></script>
+
+    </head>
+    <style>
+        body {
+            background-color: #333; /* Color de fondo oscuro en formato hexadecimal */
+            color: #c9a2a2; /* Color de texto en blanco para mayor contraste */
+        }
+    </style>
+    <body>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-sm-12"><h1>Censos de Guatemala</h1> </div>
+                <br />
+                <br />
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class=" col-sm-12 col-md-6">
+                            <div class="input-group">
+                                <select id="cmbDepa" class="form-select"
+                                    aria-label="Example select with button addon">
+                                    <option selected>Seleccionar Departamento</option>
+                                    <option value="1">Guatemala</option>
+                                    <option value="2">El Progreso</option>
+                                    <option value="3">Sacatepequez</option>
+                                    <option value="4">Chimaltenango</option>
+                                    <option value="5">Escuintla</option>
+                                    <option value="6">Santa Rosa</option>
+                                    <option value="7">Solola</option>
+                                    <option value="8">Totonicapan</option>
+                                    <option value="9">Quetzaltenango</option>
+                                    <option value="10">Suchitepequez</option>
+                                    <option value="11">Retalhuleu</option>
+                                    <option value="12">San Marcos</option>
+                                    <option value="13">Huhuetenango</option>
+                                    <option value="14">El Quiche</option>
+                                    <option value="15">Baja Verapaz</option>
+                                    <option value="16">Alta Verapaz</option>
+                                    <option value="17">El Peten</option>
+                                    <option value="18">Izabal</option>
+                                    <option value="19">Zacapa</option>
+                                    <option value="20">Chiquimula</option>
+                                    <option value="21">Jalapa</option>
+                                    <option value="22">Jutiapa</option>
+                                </select>
+                                <button onclick="llamada1();"
+                                    class="btn btn-primary" type="button">Buscar</button>
+                            </div>
+
+                        </div>
+                        <div class=" col-sm-12 col-md-6">
+                            <input id="txtDepa" type="text" class="form-control"
+                                placeholder="Buscar ID" aria-label="BuscarID">
+                        </div>
+                    </div>
+                    <br />
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header text-bg-primary p-3">
+                            Poblacion Total sexo
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">Departamento</div>
+                            <div class="col-sm-5" id="NombreD">###</div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">Hombres</div>
+                                <div class="col-sm-4" id="NumHombres">###</div>
+                                <div class="col-sm-4" id="PorHombres">%%</div>
+                                <div class="col-sm-4">Mujeres</div>
+                                <div class="col-sm-4" id="NumMujeres">###</div>
+                                <div class="col-sm-4" id="PorMujres">%%</div>
+                            </div>
+                            <div id="piechart"
+                                style="width: 400px; height: 300px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header text-bg-primary p-3">
+                            Poblacion por area
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">Departamento</div>
+                            <div class="col-sm-5" id="NombreM">###</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">Urbano</div>
+                                <div class="col-sm-4" id="NumUrb">###</div>
+                                <div class="col-sm-4" id="PorUrb">%%</div>
+                                <div class="col-sm-4">Rural</div>
+                                <div class="col-sm-4" id="NumRur">###</div>
+                                <div class="col-sm-4" id="PorRur">%%</div>
+                            </div>
+                            <div id="piechartt"
+                                style="width: 400px; height: 300px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6">
+                    <br />
+                    <div class="card">
+                        <div class="card-header text-bg-primary p-3">
+                            Poblacion Por Edades
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">Departamento</div>
+                            <div class="col-sm-5" id="NombreE">###</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">Edad 0 - 14</div>
+                                <div class="col-sm-4" id="Num014">###</div>
+                                <div class="col-sm-4" id="Por014">%%</div>
+                                <div class="col-sm-4">Edad 15 - 64</div>
+                                <div class="col-sm-4" id="Num1564">###</div>
+                                <div class="col-sm-4" id="Por1564">%%</div>
+                                <div class="col-sm-5">Edad 65 o mas</div>
+                                <div class="col-sm-3" id="Num65">###</div>
+                                <div class="col-sm-3" id="Por65">%%</div>
+                            </div>
+                            <div id="piecharttt"
+                                style="width: 400px; height: 300px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <br />
+                    <div class="card">
+                        <div class="card-header text-bg-primary p-3">
+                            Poblacion Por Pueblos
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">Departamento</div>
+                            <div class="col-sm-5" id="NombreP">###</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-4">Maya</div>
+                                <div class="col-sm-4" id="NumMaya">###</div>
+                                <div class="col-sm-4" id="PorMaya">%%</div>
+                                <div class="col-sm-4">Garifuna</div>
+                                <div class="col-sm-4" id="NumGar">###</div>
+                                <div class="col-sm-4" id="PorGar">%%</div>
+                                <div class="col-sm-4">Xinca</div>
+                                <div class="col-sm-4" id="NumXin">###</div>
+                                <div class="col-sm-4" id="PorXin">%%</div>
+                                <div class="col-sm-5">Afrodecendiente</div>
+                                <div class="col-sm-3" id="NumAfro">###</div>
+                                <div class="col-sm-3" id="PorAfro">%%</div>
+                                <div class="col-sm-4">Ladino</div>
+                                <div class="col-sm-4" id="NumLad">###</div>
+                                <div class="col-sm-4" id="PorLad">%%</div>
+                                <div class="col-sm-4">Extranjeros</div>
+                                <div class="col-sm-4" id="NumExtra">###</div>
+                                <div class="col-sm-4" id="PorExtra">%%</div>
+                            </div>
+                            <div id="piechar"
+                                style="width: 400px; height: 400px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+                <br />
+            </div>
+            <br />
+        </div>
+        <br />
+    </body>
+
+</html>
